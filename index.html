@@ -3,43 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS IDE with ESLint & Prettier</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/lint/lint.min.css">
+    <title>Modern Serverless IDE Workspace</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
 </head>
 <body>
-    <div class="compiler-container">
-        <div class="editor-section">
-            <div class="controls">
-                <span class="brand">JavaScript IDE</span>
-                <div>
-                    <button id="format-btn" class="secondary-btn">Format (Prettier)</button>
-                    <button id="run-btn">Run Code</button>
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="brand">
+                <span class="logo-icon">⚡</span>
+                <h1>Open IDE <span class="badge">Serverless</span></h1>
+            </div>
+            
+            <div class="controls-wrapper">
+                <div class="selector-container">
+                    <select id="languageSelect">
+                        <option value="javascript">JavaScript </option>
+                        <option value="python">Python 3 </option>
+                        <option value="java">Java </option>
+                        <option value="go">Go </option>
+                    </select>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="formatBtn" class="btn btn-secondary" title="Format code with Prettier rules">
+                        <span class="icon">✨</span> <span class="btn-text">Format</span>
+                    </button>
+                    <button id="lintBtn" class="btn btn-secondary" title="Analyze code syntax with ESLint rules">
+                        <span class="icon">🔍</span> <span class="btn-text">Lint</span>
+                    </button>
+                    <button id="clearBtn" class="btn btn-danger" title="Clear console logs">
+                        <span class="icon">🗑️</span> <span class="btn-text">Clear</span>
+                    </button>
+                    <button id="runBtn" class="btn btn-primary" title="Execute script locally">
+                        <span class="icon">▶</span> <span class="btn-text">Run Code</span>
+                    </button>
                 </div>
             </div>
-            <textarea id="editor-container"></textarea>
+        </header>
+
+        <div id="statusMessage" class="status-bar">
+            <span class="status-indicator"></span>
+            <span class="status-text">Ready to code. Everything executes inside your local browser.</span>
         </div>
 
-        <div class="output-section">
-            <h3>Console Output:</h3>
-            <pre id="output-box">Your console.log outputs will appear here...</pre>
-        </div>
+        <main class="workspace">
+            <section class="panel editor-panel">
+                <div class="panel-header">
+                    <span class="panel-title">main.js</span>
+                    <span class="panel-actions"></span>
+                </div>
+                <div class="editor-wrapper">
+                    <div class="line-numbers">
+                        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                    </div>
+                    <textarea id="codeEditor" spellcheck="false"></textarea>
+                </div>
+            </section>
+            
+            <section class="panel output-panel">
+                <div class="panel-header">
+                    <span class="panel-title">Terminal Output</span>
+                    <!-- <div class="terminal-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div> -->
+                </div>
+                <pre  class="result-output-panel" id="outputBox">Console initialized successfully. Press "Run Code" to view performance executions...</pre>
+            </section>
+        </main>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/hint/show-hint.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/hint/javascript-hint.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/lint/lint.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/eslint-linter-browserify@8.57.0/linter.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.8.8/standalone.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.8.8/parser-babel.js"></script>
 
     <script src="script.js"></script>
 </body>
